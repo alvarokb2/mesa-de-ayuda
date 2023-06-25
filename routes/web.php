@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TicketController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,4 +29,14 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+Route::get('/api/tickets', [TicketController::class, 'ver_tickets']);
+Route::get('/api/{proyecto}/tickets', [TicketController::class, 'ver_tickets_proyecto']);
+Route::get('/api/{proyecto}/usuario/{usuario}/tickets', [TicketController::class, 'ver_tickets_usuario_proyecto']);
+Route::get('/api/{proyecto}/usuario/{usuario}/tickets/{ticket}', [TicketController::class, 'ver_un_ticket_usuario_proyecto']);
+
+
+Route::post('/api/tickets', [TicketController::class, 'crear_tickets']);
+Route::post('/api/mis-tickets', [TicketController::class, 'ver_mis_tickets']);
+
+
+require __DIR__ . '/auth.php';
